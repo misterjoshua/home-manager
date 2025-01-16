@@ -55,6 +55,7 @@
     awscli
     azure-cli
     granted
+    steampipe
     # Editors
     neovim
     # CLI utils
