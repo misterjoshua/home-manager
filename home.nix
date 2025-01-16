@@ -123,4 +123,7 @@
   programs.git.userEmail = "joshkellendonk@gmail.com";
   programs.git.userName = "Josh Kellendonk";
   programs.git.lfs.enable = true;
+
+  # Kubectl
+  programs.kubecolor.enable = true;
 }
