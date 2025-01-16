@@ -113,6 +113,9 @@
     k = "kubectl";
   };
 
+  programs.fzf.enable = true;
+  programs.bat.enable = true;
+
   # Powerline bash prompt line
   programs.powerline-go.enable = true;
   programs.powerline-go.settings = {
