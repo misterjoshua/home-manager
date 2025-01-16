@@ -33,6 +33,7 @@
       wheel
     ]))
     poetry
+    # Rust
     rustup
     # Golang
     go
