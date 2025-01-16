@@ -113,6 +113,13 @@
     k = "kubectl";
   };
 
+  # Powerline bash prompt line
+  programs.powerline-go.enable = true;
+  programs.powerline-go.settings = {
+    mode = "flat"; # flat so it works in more terminals
+  };
+
+  # FZF for fuzzy search of files and autocomplete.
   programs.fzf = {
     enable = true;
     defaultOptions = [
@@ -126,13 +133,8 @@
     };
   };
   
+  # Preview files with bat.
   programs.bat.enable = true;
-
-  # Powerline bash prompt line
-  programs.powerline-go.enable = true;
-  programs.powerline-go.settings = {
-    mode = "flat"; # flat so it works in more terminals
-  };
 
   # Manage git's config.
   programs.git.enable = true;
