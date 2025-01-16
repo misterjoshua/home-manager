@@ -41,6 +41,8 @@
     jdk
     maven
     gradle
+    # Powershell
+    powershell
     # Git
     git
     git-lfs
