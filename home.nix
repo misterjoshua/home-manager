@@ -113,7 +113,19 @@
     k = "kubectl";
   };
 
-  programs.fzf.enable = true;
+  programs.fzf = {
+    enable = true;
+    defaultOptions = [
+      "--height 75%" "--min-height 10" "--border"
+    ];
+    fileWidgetOptions = [
+      "--preview 'bat --color=always {}'"
+    ];
+    tmux = {
+      enableShellIntegration = true;
+    };
+  };
+  
   programs.bat.enable = true;
 
   # Powerline bash prompt line
