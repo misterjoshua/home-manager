@@ -111,4 +111,10 @@
   programs.powerline-go.settings = {
     mode = "flat"; # flat so it works in more terminals
   };
+
+  # Manage git's config.
+  programs.git.enable = true;
+  programs.git.userEmail = "joshkellendonk@gmail.com";
+  programs.git.userName = "Josh Kellendonk";
+  programs.git.lfs.enable = true;
 }
