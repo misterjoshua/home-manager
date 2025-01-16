@@ -104,6 +104,7 @@
     ls = "ls --color=auto";
     grep = "grep --color=auto";
     diff = "diff --color=auto";
+    k = "kubectl";
   };
 
   # Powerline bash prompt line
