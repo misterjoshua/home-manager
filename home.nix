@@ -113,6 +113,8 @@
   # Manage bash's config.
   programs.bash.enable = true;
   programs.bash.shellAliases = {
+    l = "ls --color=auto";
+    ll = "ls -l --color=auto";
     ls = "ls --color=auto";
     grep = "grep --color=auto";
     diff = "diff --color=auto";
