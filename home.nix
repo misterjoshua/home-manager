@@ -61,8 +61,6 @@
     azure-cli
     granted
     steampipe
-    # Editors
-    neovim
     # CLI utils
     jq
     yq
@@ -120,6 +118,7 @@
     grep = "grep --color=auto";
     diff = "diff --color=auto";
     k = "kubectl";
+    vim = "nvim";
   };
 
   # Powerline bash prompt line
@@ -153,4 +152,11 @@
 
   # Kubectl
   programs.kubecolor.enable = true;
+  
+  programs.neovim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [
+      vim-plug
+    ];
+  };
 }
