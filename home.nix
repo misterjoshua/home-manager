@@ -103,6 +103,7 @@
 
   home.sessionVariables = {
     EDITOR = "vim";
+    PATH = "$PATH:$HOME/.config/composer/vendor/bin";
   };
 
   # Let Home Manager install and manage itself.
