@@ -27,8 +27,8 @@
     bun
     deno
     # Php
-    php84
-    php84Packages.composer
+    php83
+    php83Packages.composer
     ddev
     # Python
     (python3.withPackages (ps: with ps; [
