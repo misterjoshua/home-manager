@@ -103,7 +103,6 @@
   };
 
   home.sessionVariables = {
-    EDITOR = "vim";
     PATH = "$PATH:$HOME/.config/composer/vendor/bin";
   };
 
@@ -156,8 +155,6 @@
   
   programs.neovim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [
-      vim-plug
-    ];
+    defaultEditor = true;
   };
 }
