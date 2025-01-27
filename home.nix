@@ -24,6 +24,8 @@
     ./nvm.nix
     # Install the terminus package
     ./terminus.nix
+    # Kubernetes Tools
+    ./kube.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
@@ -106,7 +108,7 @@
   };
 
   home.sessionVariables = {
-    PATH = "$PATH:$HOME/.config/composer/vendor/bin";
+    PATH = "$PATH:$HOME/.config/composer/vendor/bin:$HOME/.local/bin";
   };
 
   # Let Home Manager install and manage itself.
@@ -120,7 +122,6 @@
     ls = "ls --color=auto";
     grep = "grep --color=auto";
     diff = "diff --color=auto";
-    k = "kubectl";
     vim = "nvim";
   };
   
@@ -155,9 +156,6 @@
     lfs.enable = true;
     extraConfig.pull.rebase = true;
   };
-
-  # Kubectl
-  programs.kubecolor.enable = true;
   
   programs.neovim = {
     enable = true;
