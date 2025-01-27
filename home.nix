@@ -21,11 +21,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # Node
-    nodejs
-    yarn
-    bun
-    deno
     # Php
     php83
     php83Packages.composer
@@ -120,6 +115,12 @@
     k = "kubectl";
     vim = "nvim";
   };
+  programs.bash.initExtra = ''
+    # Integrate with nvm if available.
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  '';
 
   # Powerline bash prompt line
   programs.powerline-go.enable = true;
