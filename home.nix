@@ -22,6 +22,8 @@
   imports = [
     # Install NVM (Node Version Manager)
     ./nvm.nix
+    # Install the terminus package
+    ./terminus.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
