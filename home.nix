@@ -146,10 +146,13 @@
   programs.bat.enable = true;
 
   # Manage git's config.
-  programs.git.enable = true;
-  programs.git.userEmail = "joshkellendonk@gmail.com";
-  programs.git.userName = "Josh Kellendonk";
-  programs.git.lfs.enable = true;
+  programs.git = {
+    enable = true;
+    userEmail = "joshkellendonk@gmail.com";
+    userName = "Josh Kellendonk";
+    lfs.enable = true;
+    extraConfig.pull.rebase = true;
+  };
 
   # Kubectl
   programs.kubecolor.enable = true;
