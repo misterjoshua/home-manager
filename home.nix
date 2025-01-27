@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Allow unfree packages
@@ -17,6 +17,12 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
+
+
+  imports = [
+    # Install NVM (Node Version Manager)
+    ./nvm.nix
+  ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -115,13 +121,7 @@
     k = "kubectl";
     vim = "nvim";
   };
-  programs.bash.initExtra = ''
-    # Integrate with nvm if available.
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  '';
-
+  
   # Powerline bash prompt line
   programs.powerline-go.enable = true;
   programs.powerline-go.settings = {
