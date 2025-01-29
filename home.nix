@@ -22,11 +22,11 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./modules/kube.nix
-    ./modules/neovim
-    ./modules/nvm.nix
-    ./modules/scripts
-    ./modules/terminus.nix
+    ./imports/kube.nix
+    ./imports/neovim
+    ./imports/nvm.nix
+    ./imports/scripts
+    ./imports/terminus.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
