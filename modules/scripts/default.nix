@@ -6,6 +6,6 @@
   };
   
   home.file = {
-    ".local/bin/home-manager-update".source = scripts/home-manager-update;
+    ".local/bin/home-manager-update".source = ./home-manager-update;
   };
 }
