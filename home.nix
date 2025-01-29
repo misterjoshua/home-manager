@@ -25,6 +25,7 @@
     ./imports/kube.nix
     ./imports/neovim
     ./imports/nvm.nix
+    ./imports/ollama
     ./imports/scripts
     ./imports/terminus.nix
   ];
