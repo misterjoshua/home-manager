@@ -26,6 +26,7 @@
     ./modules/terminus.nix
     ./modules/kube.nix
     ./modules/neovim.nix
+    ./modules/scripts.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your

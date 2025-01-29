@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -ueo pipefail
+
+pushd .
+cd ~/.config/home-manager
+git pull
+home-manager switch -b backup
+popd
