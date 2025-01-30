@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   # Allow unfree packages
@@ -55,6 +55,12 @@
     gradle
     # Powershell
     powershell
+    # Lua
+    lua-language-server
+    # Nix
+    nixd
+    # Vim
+    vim-language-server
     # Git
     git
     git-lfs
