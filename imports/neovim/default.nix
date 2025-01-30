@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -14,5 +14,6 @@
   # Default editor
   home.sessionVariables.EDITOR = "nvim";
   
-  home.file.".vimrc".source = ./vimrc;
+  home.file = {
+  };
 }
