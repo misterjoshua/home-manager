@@ -74,6 +74,8 @@
     azure-cli
     granted
     steampipe
+    # Comms
+    irssi
     # CLI utils
     jq
     yq
