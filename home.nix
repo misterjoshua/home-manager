@@ -22,6 +22,7 @@
   programs.home-manager.enable = true;
 
   imports = [
+    ./imports/granted
     ./imports/kube.nix
     ./imports/neovim
     ./imports/nvm.nix
@@ -72,7 +73,6 @@
     # Cloud
     awscli
     azure-cli
-    granted
     steampipe
     # Comms
     irssi
