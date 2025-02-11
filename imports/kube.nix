@@ -13,6 +13,7 @@
     kubectl
     kubectx
     kube-capacity
+    kubectl-tree
     velero
   ];
 
@@ -42,5 +43,6 @@
     ".local/bin/kubectl-ns".source = lib.mkForce "${pkgs.kubectx}/bin/kubens";
     ".local/bin/kubectl-ctx".source = lib.mkForce "${pkgs.kubectx}/bin/kubectx";
     ".local/bin/kubectl-capacity".source = lib.mkForce "${pkgs.kube-capacity}/bin/kube-capacity";
+    ".local/bin/kubectl-tree".source = lib.mkForce "${pkgs.kubectl-tree}/bin/kubectl-tree";
   };
 }
