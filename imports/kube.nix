@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     kubectl
     kubectx
+    kube-capacity
     velero
   ];
 
@@ -40,5 +41,6 @@
   home.file = {
     ".local/bin/kubectl-ns".source = lib.mkForce "${pkgs.kubectx}/bin/kubens";
     ".local/bin/kubectl-ctx".source = lib.mkForce "${pkgs.kubectx}/bin/kubectx";
+    ".local/bin/kubectl-capacity".source = lib.mkForce "${pkgs.kube-capacity}/bin/kube-capacity";
   };
 }
