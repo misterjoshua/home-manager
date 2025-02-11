@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     kubectl
     kubectx
+    velero
   ];
 
   # Add handy kubectl aliases
