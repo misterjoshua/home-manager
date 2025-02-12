@@ -40,4 +40,11 @@ in {
     mkdir -p "${config.home.homeDirectory}/.local/state/nvm.cache"
     mkdir -p "${config.home.homeDirectory}/.local/state/nvm.versions"
   '';
+
+  # Add ts_ls language server package
+  home.packages = with pkgs; [
+    nodejs
+    typescript
+    typescript-language-server
+  ];
 }
