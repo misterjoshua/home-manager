@@ -79,15 +79,20 @@
     # CLI utils
     jq
     yq
-    httpie
-    wget
-    ngrok
     tree
     htop
     tmux
     direnv
     graphviz
+    # Network
     curl
+    mtr
+    traceroute
+    netcat
+    nmap
+    httpie
+    wget
+    ngrok
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
