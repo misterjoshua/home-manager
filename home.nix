@@ -93,6 +93,9 @@
     httpie
     wget
     ngrok
+    cloudflared
+    # Reports
+    steampipe
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
