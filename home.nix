@@ -50,6 +50,9 @@
     # Golang
     go
     gopls
+    # Protocol Buffers
+    protobuf
+    protoc-gen-go
     # Java
     jdk
     maven
