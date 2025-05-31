@@ -50,9 +50,11 @@
     # Golang
     go
     gopls
+    delve
     # Protocol Buffers
     protobuf
     protoc-gen-go
+    protoc-gen-go-grpc
     # Java
     jdk
     maven
