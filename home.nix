@@ -75,8 +75,10 @@
     # Ansible
     ansible
     ansible-lint
+    # Terraform
+    terraform
     # Cloud
-    awscli
+    awscli2
     azure-cli
     steampipe
     # Comms
