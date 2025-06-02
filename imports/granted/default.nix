@@ -31,6 +31,7 @@ in {
 
       installPhase = ''
         mkdir -p $out/bin
+        install -Dm755 $GOPATH/bin/granted $out/bin/granted
         install -Dm755 $GOPATH/bin/granted $out/bin/assumego
         install -Dm755 $src/scripts/assume $out/bin/assume
       '';
