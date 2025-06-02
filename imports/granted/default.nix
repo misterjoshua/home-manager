@@ -1,7 +1,7 @@
 { stdenv, pkgs, lib, ... }:
 
 let
-  version = "0.36.3";
+  version = "0.38.0";
   sha256 = "sha256-fLnrc+Aek2bFrJfCCwI9HRAocokb3IlGZbjYzur7LHk=";
   vendorHash = "sha256-imArhe/TjrXv68ZF7moOcKjvxAvQzm7XfBkyWfwNJJs=";
 in {
