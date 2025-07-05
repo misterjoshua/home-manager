@@ -38,13 +38,6 @@
     php83
     php83Packages.composer
     ddev
-    # Python
-    (python3.withPackages (ps: with ps; [
-      pip
-      setuptools
-      wheel
-    ]))
-    poetry
     # Rust
     rustup
     # Golang
@@ -101,6 +94,8 @@
     wget
     ngrok
     cloudflared
+    host
+    dig
     # Reports
     steampipe
 
