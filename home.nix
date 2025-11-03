@@ -1,6 +1,19 @@
 { pkgs, ... }:
 
-{
+let
+  terraform-1_3_7 = pkgs.terraform.overrideAttrs (old: {
+    version = "1.3.7";
+    src = pkgs.fetchFromGitHub {
+      owner = "hashicorp";
+      repo  = "terraform";
+      rev   = "v1.3.7";
+      # fake hash in SRI form
+      hash = "sha256-z49DXJ9oYObJQWHPeuKvQ6jJtAheYuy0+QmvZ74ZbTQ=";
+    };
+    patches = [];
+    vendorHash = "sha256-fviukVGBkbxFs2fJpEp/tFMymXex7NRQdcGIIA9W88k=";
+  });
+in {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -69,7 +82,7 @@
     ansible
     ansible-lint
     # Terraform
-    terraform
+    terraform-1_3_7
     # Cloud
     awscli2
     azure-cli
