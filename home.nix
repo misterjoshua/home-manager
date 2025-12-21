@@ -40,6 +40,8 @@ in {
     php83
     php83Packages.composer
     ddev
+    # Packer
+    packer
     # Rust
     rustup
     # Golang
@@ -54,6 +56,8 @@ in {
     jdk
     maven
     gradle
+    # Android
+    android-tools
     # Powershell
     powershell
     # Lua
