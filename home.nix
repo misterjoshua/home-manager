@@ -174,4 +174,6 @@ in {
       extraConfig.pull.rebase = true;
     };
   };
+
+  programs.gh.enable = true;
 }
