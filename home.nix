@@ -71,12 +71,8 @@ in {
     git-lfs
     git-crypt
     gh
-    # Ansible
-    ansible
-    ansible-lint
     # Cloud
     awscli2
-    azure-cli
     steampipe
     # Comms
     irssi
