@@ -94,7 +94,6 @@ in {
     wget
     ngrok
     cloudflared
-    host
     dig
     # Reports
     steampipe
@@ -168,8 +167,8 @@ in {
   # Manage git's config.
   programs.git.settings = {
     enable = true;
-    userEmail = "joshkellendonk@gmail.com";
-    userName = "Josh Kellendonk";
+    user.email = "joshkellendonk@gmail.com";
+    user.name = "Josh Kellendonk";
     lfs.enable = true;
     extraConfig.pull.rebase = true;
   };
