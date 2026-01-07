@@ -165,11 +165,13 @@ in {
   programs.bat.enable = true;
 
   # Manage git's config.
-  programs.git.settings = {
+  programs.git = {
     enable = true;
-    user.email = "joshkellendonk@gmail.com";
-    user.name = "Josh Kellendonk";
     lfs.enable = true;
-    extraConfig.pull.rebase = true;
+    settings = {
+      user.email = "joshkellendonk@gmail.com";
+      user.name = "Josh Kellendonk";
+      extraConfig.pull.rebase = true;
+    };
   };
 }
