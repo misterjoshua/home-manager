@@ -166,7 +166,7 @@ in {
   programs.bat.enable = true;
 
   # Manage git's config.
-  programs.git = {
+  programs.git.settings = {
     enable = true;
     userEmail = "joshkellendonk@gmail.com";
     userName = "Josh Kellendonk";
