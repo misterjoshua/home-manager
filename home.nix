@@ -131,6 +131,19 @@ in {
   programs.powerline-go.enable = true;
   programs.powerline-go.settings = {
     mode = "flat"; # flat so it works in more terminals
+    modules = [
+      "user" # Show the user.
+      "host" # Show the host.
+      "time" # Show the time.
+      "ssh" # ???
+      "direnv" # Show the direnv context.
+      "venv"
+      "git" # Git info
+      "kube" # Show the current kubernetes context.
+      "cwd" # Show the current working directory.
+      "newline"
+      "root" # Show if you're root.
+    ];
   };
 
   # FZF for fuzzy search of files and autocomplete.
@@ -150,23 +163,23 @@ in {
   # Preview files with bat.
   programs.bat.enable = true;
 
-  # Manage git's config.
-  programs.git = {
-    enable = true;
-    lfs.enable = true;
-    settings = {
-      user.email = "joshkellendonk@gmail.com";
-      user.name = "Josh Kellendonk";
-      extraConfig.pull.rebase = true;
+  programs = {
+    git = {
+      enable = true;
+      lfs.enable = true;
+      settings = {
+        user.email = "joshkellendonk@gmail.com";
+        user.name = "Josh Kellendonk";
+        extraConfig.pull.rebase = true;
+      };
     };
-  };
 
-  # Manage github cli.
-  programs.gh.enable = true;
+    gh.enable = true; # Manage github cli.
 
-  programs.direnv =  {
-    enable = true;
-    enableBashIntegration = true;
-    nix-direnv.enable = true;
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;
+    };
   };
 }
