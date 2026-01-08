@@ -35,36 +35,13 @@ in {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # Php
-    php83
-    php83Packages.composer
-    ddev
-    # Packer
-    packer
-    # Rust
-    rustup
-    # Golang
-    go
-    gopls
-    delve
-    # Protocol Buffers
-    protobuf
-    protoc-gen-go
-    protoc-gen-go-grpc
-    # Java
-    jdk
-    maven
-    gradle
-    # Android
-    android-tools
-    # Powershell
+    # Shells
     powershell
-    # Lua
+    bash
+    # Language Servers
     lua-language-server
-    # Nix
-    nixd
-    # Vim
     vim-language-server
+    nixd
     # Git
     git
     git-lfs
@@ -74,8 +51,6 @@ in {
     azure-cli
     awscli2
     steampipe
-    # Comms
-    irssi
     # CLI utils
     jq
     yq
@@ -92,7 +67,6 @@ in {
     httpie
     wget
     ngrok
-    cloudflared
     dig
   ];
 
