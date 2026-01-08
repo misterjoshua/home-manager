@@ -13,7 +13,7 @@
 
   # Default editor
   home.sessionVariables.EDITOR = "nvim";
-  
+
   home.file = {
   };
 }

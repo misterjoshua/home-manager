@@ -1,12 +1,16 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # Kubectl
   programs.kubecolor = {
-    enable = true; 
+    enable = true;
     enableAlias = true;
   };
-
 
   # Plugins
   home.packages = with pkgs; [

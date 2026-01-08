@@ -1,10 +1,16 @@
-{ stdenv, pkgs, lib, ... }:
+{
+  stdenv,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   version = "0.38.0";
   sha256 = "sha256-fLnrc+Aek2bFrJfCCwI9HRAocokb3IlGZbjYzur7LHk=";
   vendorHash = "sha256-imArhe/TjrXv68ZF7moOcKjvxAvQzm7XfBkyWfwNJJs=";
-in {
+in
+{
   home.packages = with pkgs; [
     (buildGoModule {
       pname = "assume";
@@ -44,9 +50,8 @@ in {
       };
     })
   ];
-  
+
   home.shellAliases = {
     assume = "source ~/.nix-profile/bin/assume";
   };
 }
-

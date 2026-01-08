@@ -1,8 +1,14 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   nvmDir = ".nvm-nix";
-in {
+in
+{
   # Install nvm (Node Version Manager)
   programs.bash.initExtra = lib.mkAfter ''
     # Integrate with nvm if available. 
@@ -19,7 +25,7 @@ in {
       src = pkgs.fetchFromGitHub {
         owner = "nvm-sh";
         repo = "nvm";
-        rev = "v0.40.1"; 
+        rev = "v0.40.1";
         sha256 = "sha256-PMeFHjJ3qcphXV8MceZwleOgJrDfEeS3m/ZGvKlWbeg=";
       };
 
@@ -35,7 +41,7 @@ in {
   };
 
   # Create required NVM state directories
-  home.activation.createNvmDirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.createNvmDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "${config.home.homeDirectory}/.local/state/nvm.aliases"
     mkdir -p "${config.home.homeDirectory}/.local/state/nvm.cache"
     mkdir -p "${config.home.homeDirectory}/.local/state/nvm.versions"

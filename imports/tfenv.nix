@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   tfenv-package = pkgs.stdenv.mkDerivation rec {
@@ -14,14 +19,14 @@ let
 
     installPhase = ''
       mkdir -p $out/opt/tfenv
-      
+
       # Install everything to opt/tfenv (including CHANGELOG.md and other files)
       cp -r . $out/opt/tfenv/
-      
+
       # Make all scripts executable
       chmod +x $out/opt/tfenv/bin/*
       chmod +x $out/opt/tfenv/libexec/* 2>/dev/null || true
-      
+
       # Create bin directory and symlink the binaries
       mkdir -p $out/bin
       for script in $out/opt/tfenv/bin/*; do
@@ -45,17 +50,17 @@ in
   home.sessionVariables = {
     TFENV_ROOT = "${config.home.homeDirectory}/.tfenv";
   };
-  
+
   # Initialize .tfenv directory structure on activation
-  home.activation.tfenvSetup = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.tfenvSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     TFENV_ROOT="${config.home.homeDirectory}/.tfenv"
     TFENV_SHARE="${tfenv-package}/opt/tfenv"
-    
+
     $DRY_RUN_CMD mkdir -p "$TFENV_ROOT"
     $DRY_RUN_CMD ln -sfn "$TFENV_SHARE/lib" "$TFENV_ROOT/lib"
     $DRY_RUN_CMD ln -sfn "$TFENV_SHARE/libexec" "$TFENV_ROOT/libexec"
     $DRY_RUN_CMD ln -sfn "$TFENV_SHARE/CHANGELOG.md" "$TFENV_ROOT/CHANGELOG.md"
-    
+
     # Also link other files that might be needed
     for file in "$TFENV_SHARE"/*.md "$TFENV_SHARE"/LICENSE "$TFENV_SHARE"/*.txt; do
       if [ -f "$file" ]; then
@@ -64,4 +69,3 @@ in
     done
   '';
 }
-

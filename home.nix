@@ -1,13 +1,17 @@
 { pkgs, ... }:
 
 let
-in {
+in
+{
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   # Allow unfree packages
@@ -19,14 +23,12 @@ in {
     stateVersion = "24.11"; # Don't change this.
   };
 
-  
-
   imports = [
-    ./imports/granted
+    ./imports/granted.nix
     ./imports/kube.nix
-    ./imports/neovim
+    ./imports/neovim.nix
     ./imports/nvm.nix
-    ./imports/ollama
+    ./imports/ollama.nix
     ./imports/scripts
     ./imports/terminus.nix
     ./imports/tfenv.nix
@@ -88,7 +90,7 @@ in {
   home.sessionVariables = {
     PATH = "$PATH:$HOME/.config/composer/vendor/bin:$HOME/.local/bin";
   };
-  
+
   # Manage bash's config.
   programs.bash.enable = true;
   programs.bash.shellAliases = {
@@ -100,7 +102,7 @@ in {
     hm = "vim ~/.config/home-manager";
     hms = "home-manager switch";
   };
-  
+
   # Powerline bash prompt line
   programs.powerline-go.enable = true;
   programs.powerline-go.settings = {
@@ -124,7 +126,9 @@ in {
   programs.fzf = {
     enable = true;
     defaultOptions = [
-      "--height 75%" "--min-height 10" "--border"
+      "--height 75%"
+      "--min-height 10"
+      "--border"
     ];
     fileWidgetOptions = [
       "--preview 'bat --color=always {}'"
@@ -133,7 +137,7 @@ in {
       enableShellIntegration = true;
     };
   };
-  
+
   # Preview files with bat.
   programs.bat.enable = true;
 

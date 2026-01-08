@@ -2,7 +2,10 @@
   description = "Home Manager Flake";
 
   nixConfig = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   inputs = {
@@ -13,10 +16,21 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
-    homeConfigurations.josh =  home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      modules = [ ./home.nix ];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
+    {
+      shells.x86_64-linux = {
+        inherit (nixpkgs.legacyPackages.x86_64-linux) bash;
+      };
+
+      homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [ ./home.nix ];
+      };
     };
-  };
 }
