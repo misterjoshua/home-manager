@@ -2,25 +2,24 @@
 
 let
 in {
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "josh";
-  home.homeDirectory = "/home/josh";
+  home = {
+    username = "josh";
+    homeDirectory = "/home/josh";
+    stateVersion = "24.11"; # Don't change this.
+  };
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "24.11"; # Please read the comment before changing.
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  
 
   imports = [
     ./imports/granted
@@ -72,6 +71,7 @@ in {
     git-crypt
     gh
     # Cloud
+    azure-cli
     awscli2
     steampipe
     # Comms
@@ -82,7 +82,6 @@ in {
     tree
     htop
     tmux
-    direnv
     graphviz
     # Network
     curl
@@ -95,21 +94,6 @@ in {
     ngrok
     cloudflared
     dig
-    # Reports
-    steampipe
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -139,6 +123,8 @@ in {
     ls = "ls --color=auto";
     grep = "grep --color=auto";
     diff = "diff --color=auto";
+    hm = "vim ~/.config/home-manager";
+    hms = "home-manager switch";
   };
   
   # Powerline bash prompt line
@@ -175,5 +161,12 @@ in {
     };
   };
 
+  # Manage github cli.
   programs.gh.enable = true;
+
+  programs.direnv =  {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+  };
 }
