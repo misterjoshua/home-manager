@@ -1,10 +1,12 @@
-{ pkgs, ... }:
-
-let
-in
 {
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  programs.home-manager.enable = true; # Let Home Manager install and manage itself.
+  nixpkgs.config.allowUnfree = true; # Allow unfree packages
 
   nix = {
     package = pkgs.nix;
@@ -14,29 +16,22 @@ in
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  home = {
-    username = "josh";
-    homeDirectory = "/home/josh";
-    stateVersion = "24.11"; # Don't change this.
-  };
-
   imports = [
-    ./imports/granted.nix
-    ./imports/kube.nix
-    ./imports/neovim.nix
-    ./imports/nvm.nix
-    ./imports/ollama.nix
-    ./imports/scripts
-    ./imports/terminus.nix
-    ./imports/tfenv.nix
+    ../imports/granted.nix
+    ../imports/kube.nix
+    ../imports/neovim.nix
+    ../imports/nvm.nix
+    ../imports/ollama.nix
+    ../imports/scripts
+    ../imports/terminus.nix
+    ../imports/tfenv.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    pipx
+    apg
     # Shells
     powershell
     bash
@@ -50,7 +45,6 @@ in
     git-crypt
     gh
     # Cloud
-    azure-cli
     awscli2
     steampipe
     # CLI utils
@@ -60,6 +54,8 @@ in
     htop
     tmux
     graphviz
+    unzip
+    binwalk
     # Network
     curl
     mtr

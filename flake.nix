@@ -23,6 +23,14 @@
       home-manager,
       ...
     }:
+
+    let
+      mkHome = pkgs: modules: home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = modules;
+        inherit;
+      };
+    in
     {
       shells.x86_64-linux = {
         inherit (nixpkgs.legacyPackages.x86_64-linux) bash;
@@ -30,7 +38,11 @@
 
       homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [ ./home.nix ];
+        modules = [
+          ./profiles/josh.nix
+          ./profiles/home.nix
+          ./profiles/wsl.nix
+        ];
       };
     };
 }
