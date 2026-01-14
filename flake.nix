@@ -26,11 +26,13 @@
     }:
 
     let
-      mkHome = pkgs: modules: home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = modules;
-        inherit;
-      };
+      mkHome =
+        pkgs: modules:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = modules;
+          inherit ;
+        };
     in
     {
       devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
@@ -59,13 +61,15 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
-              users.josh = {...}: {
-                imports = [
-                  ./profiles/josh.nix
-                  ./profiles/home.nix
-                  ./profiles/wsl.nix
-                ];
-              };
+              users.josh =
+                { ... }:
+                {
+                  imports = [
+                    ./profiles/josh.nix
+                    ./profiles/home.nix
+                    ./profiles/wsl.nix
+                  ];
+                };
             };
           }
         ];
