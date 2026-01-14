@@ -38,10 +38,12 @@
       };
 
       homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
         modules = [ homeModule ];
       };
 
       homeConfigurations.josh-wsl = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
         modules = [
           homeModule
           ./profiles/wsl.nix
