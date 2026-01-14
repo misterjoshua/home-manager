@@ -39,13 +39,13 @@
 
       homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ homeModule ];
+        modules = [ ./home.nix ];
       };
 
       homeConfigurations.josh-wsl = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          homeModule
+          ./home.nix
           ./profiles/wsl.nix
         ];
       };
@@ -62,7 +62,7 @@
               backupFileExtension = "backup";
               users.josh = {
                 imports = [
-                  homeModule
+                  ./profiles/all.nix
                   ./profiles/gui.nix
                   ./profiles/games.nix
                 ];
