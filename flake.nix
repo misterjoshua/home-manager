@@ -3,7 +3,10 @@
 
   nixConfig = {
     allowUnfree = true;
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   inputs = {
@@ -30,8 +33,10 @@
       };
     in
     {
-      shells.x86_64-linux = {
-        inherit (nixpkgs.legacyPackages.x86_64-linux) bash;
+      devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
+        packages = with nixpkgs.legacyPackages.x86_64-linux; [
+          nixfmt
+        ];
       };
 
       homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
@@ -48,7 +53,8 @@
         modules = [
           ./nixos/configuration.nix
 
-          home-manager.nixosModules.home-manager {
+          home-manager.nixosModules.home-manager
+          {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;

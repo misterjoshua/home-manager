@@ -45,7 +45,10 @@
   users.users.josh = {
     isNormalUser = true;
     description = "Josh";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   # Install firefox.
