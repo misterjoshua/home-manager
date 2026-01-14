@@ -1,11 +1,9 @@
 {
-  description = "Home Manager Flake";
+  description = "KlonkadonkOS";
 
   nixConfig = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    allowUnfree = true;
+    experimental-features = [ "nix-command" "flakes" ];
   };
 
   inputs = {
@@ -42,6 +40,28 @@
           ./profiles/josh.nix
           ./profiles/home.nix
           ./profiles/wsl.nix
+        ];
+      };
+
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./nixos/configuration.nix
+
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              users.josh = {...}: {
+                imports = [
+                  ./profiles/josh.nix
+                  ./profiles/home.nix
+                  ./profiles/wsl.nix
+                ];
+              };
+            };
+          }
         ];
       };
     };

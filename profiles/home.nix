@@ -6,15 +6,6 @@
 }:
 {
   programs.home-manager.enable = true; # Let Home Manager install and manage itself.
-  nixpkgs.config.allowUnfree = true; # Allow unfree packages
-
-  nix = {
-    package = pkgs.nix;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-  };
 
   imports = [
     ../imports/granted.nix
