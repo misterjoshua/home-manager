@@ -5,7 +5,10 @@
   ...
 }:
 {
-  programs.home-manager.enable = true; # Let Home Manager install and manage itself.
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   home = {
     username = "josh";
