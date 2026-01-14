@@ -3,6 +3,8 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
+  nixpkgs.config.allowUnfree = true;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -13,17 +15,6 @@
 
   time.timeZone = "America/Edmonton";
   i18n.defaultLocale = "en_CA.UTF-8";
-
-  services.xserver = {
-    enable = true;
-    autoRepeatDelay = 200;
-    autoRepeatInterval = 35;
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-    libinput.enable = true;
-  };
 
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -42,23 +33,21 @@
   services.printing.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.josh = {
-    isNormalUser = true;
-    description = "Josh";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+  users = {
+    defaultUserShell = pkgs.bashInteractive;
+    users.josh = {
+      isNormalUser = true;
+      description = "Josh";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+    };
   };
 
   # Install firefox.
   programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  programs.bash.enable = true;
   environment.systemPackages = with pkgs; [
     vim
   ];

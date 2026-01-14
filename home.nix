@@ -7,20 +7,27 @@
 {
   programs.home-manager.enable = true; # Let Home Manager install and manage itself.
 
+  home = {
+    username = "josh";
+    homeDirectory = "/home/josh";
+    stateVersion = "24.11";
+  };
+
   imports = [
-    ../imports/granted.nix
-    ../imports/kube.nix
-    ../imports/neovim.nix
-    ../imports/nvm.nix
-    ../imports/ollama.nix
-    ../imports/scripts
-    ../imports/terminus.nix
-    ../imports/tfenv.nix
+    ./imports/granted.nix
+    ./imports/kube.nix
+    ./imports/neovim.nix
+    ./imports/nvm.nix
+    ./imports/ollama.nix
+    ./imports/scripts
+    ./imports/terminus.nix
+    ./imports/tfenv.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    _1password-cli
     pipx
     apg
     # Shells

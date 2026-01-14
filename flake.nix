@@ -2,7 +2,6 @@
   description = "KlonkadonkOS";
 
   nixConfig = {
-    allowUnfree = true;
     experimental-features = [
       "nix-command"
       "flakes"
@@ -10,6 +9,7 @@
   };
 
   inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -19,57 +19,52 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
+      self,
       ...
     }:
-
     let
-      mkHome =
-        pkgs: modules:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = modules;
-          inherit ;
-        };
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      homeModule = ./home.nix;
     in
     {
-      devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
-        packages = with nixpkgs.legacyPackages.x86_64-linux; [
-          nixfmt
-        ];
+      devShells.${system}.default = pkgs.mkShell {
+        packages = with pkgs; [ nixfmt ];
       };
 
       homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [ homeModule ];
+      };
+
+      homeConfigurations.josh-wsl = home-manager.lib.homeManagerConfiguration {
         modules = [
-          ./profiles/josh.nix
-          ./profiles/home.nix
+          homeModule
           ./profiles/wsl.nix
         ];
       };
 
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         modules = [
           ./nixos/configuration.nix
-
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
-              useUserPackages = true;
+              useUserPackages = false;
               backupFileExtension = "backup";
-              users.josh =
-                { ... }:
-                {
-                  imports = [
-                    ./profiles/josh.nix
-                    ./profiles/home.nix
-                    ./profiles/wsl.nix
-                  ];
-                };
+              users.josh = {
+                imports = [
+                  homeModule
+                  ./profiles/gui.nix
+                  ./profiles/games.nix
+                ];
+              };
             };
           }
         ];
