@@ -12,14 +12,14 @@
   };
 
   imports = [
-    ../imports/granted.nix
-    ../imports/kube.nix
-    ../imports/neovim.nix
-    ../imports/nvm.nix
-    ../imports/ollama.nix
-    ../imports/scripts
-    ../imports/terminus.nix
-    ../imports/tfenv.nix
+    ../modules/granted.nix
+    ../modules/kube.nix
+    ../modules/neovim.nix
+    ../modules/nvm.nix
+    ../modules/ollama.nix
+    ../modules/scripts
+    ../modules/terminus.nix
+    ../modules/tfenv.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
