@@ -15,12 +15,18 @@ rec {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager-utils = {
+      url = ./home-manager-utils;
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs =
     {
       nixpkgs,
       home-manager,
+      home-manager-utils,
       self,
       ...
     }:
@@ -31,23 +37,20 @@ rec {
         config.allowUnfree = true;
       };
       mkSystemUsers = import ./nixos/user.nix { inherit home-manager; };
-      homeManagerProfile = import ./profiles/home-manager;
     in
     {
       devShells.${system}.default = import ./shell.nix { inherit pkgs; };
 
-      homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations.josh = home-manager-utils.standaloneHome {
+        username = "josh";
         modules = [
-          (homeManagerProfile.standalone { username = "josh"; })
           ./profiles/common.nix
         ];
       };
 
-      homeConfigurations.josh-wsl = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations.josh-wsl = home-manager-utils.standaloneHome {
+        username = "josh";
         modules = [
-          (homeManagerProfile.standalone { username = "josh"; })
           ./profiles/common.nix
           ./profiles/wsl.nix
         ];
@@ -57,17 +60,16 @@ rec {
         inherit system;
         modules = [
           ./nixos/configuration.nix
-          (mkSystemUsers {
+          (home-manager-utils.nixosUsers {
             users.josh = {
-              groups = [
-                "networkmanager"
-                "wheel"
-              ];
               modules = [
-                (homeManagerProfile.nixos { })
                 ./profiles/common.nix
                 ./profiles/gui.nix
                 ./profiles/games.nix
+              ];
+              extraGroups = [
+                "networkmanager"
+                "wheel"
               ];
             };
           })
