@@ -33,9 +33,7 @@
       mkSystemUsers = import ./nixos/user.nix { inherit home-manager; };
     in
     {
-      devShells.${system}.default = pkgs.mkShell {
-        packages = with pkgs; [ nixfmt ];
-      };
+      devShells.${system}.default = import ./shell.nix { inherit pkgs; };
 
       homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
