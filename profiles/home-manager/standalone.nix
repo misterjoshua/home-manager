@@ -1,5 +1,13 @@
+{
+  username,
+  homeDirectory ? "/home/${username}",
+  stateVersion ? "24.11",
+}:
 { pkgs, ... }:
 {
+
+  home = { inherit username homeDirectory stateVersion; };
+
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [

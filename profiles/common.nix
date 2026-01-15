@@ -5,12 +5,6 @@
   ...
 }:
 {
-  home = {
-    username = "josh";
-    homeDirectory = "/home/josh";
-    stateVersion = "24.11";
-  };
-
   imports = [
     ../modules/granted.nix
     ../modules/kube.nix

@@ -1,4 +1,4 @@
-{
+rec {
   description = "KlonkadonkOS";
 
   nixConfig = {
@@ -31,6 +31,7 @@
         config.allowUnfree = true;
       };
       mkSystemUsers = import ./nixos/user.nix { inherit home-manager; };
+      homeManagerProfile = import ./profiles/home-manager;
     in
     {
       devShells.${system}.default = import ./shell.nix { inherit pkgs; };
@@ -38,7 +39,7 @@
       homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home.nix
+          (homeManagerProfile.standalone { username = "josh"; })
           ./profiles/common.nix
         ];
       };
@@ -46,7 +47,7 @@
       homeConfigurations.josh-wsl = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home.nix
+          (homeManagerProfile.standalone { username = "josh"; })
           ./profiles/common.nix
           ./profiles/wsl.nix
         ];
@@ -63,6 +64,7 @@
                 "wheel"
               ];
               modules = [
+                (homeManagerProfile.nixos { })
                 ./profiles/common.nix
                 ./profiles/gui.nix
                 ./profiles/games.nix
