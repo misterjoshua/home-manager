@@ -30,7 +30,7 @@
         inherit system;
         config.allowUnfree = true;
       };
-      homeModule = ./home.nix;
+      mkSystemUsers = import ./nixos/user.nix { inherit home-manager; };
     in
     {
       devShells.${system}.default = pkgs.mkShell {
@@ -39,13 +39,17 @@
 
       homeConfigurations.josh = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home.nix ];
+        modules = [
+          ./home.nix
+          ./profiles/common.nix
+        ];
       };
 
       homeConfigurations.josh-wsl = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ./home.nix
+          ./profiles/common.nix
           ./profiles/wsl.nix
         ];
       };
@@ -54,21 +58,19 @@
         inherit system;
         modules = [
           ./nixos/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = false;
-              backupFileExtension = "backup";
-              users.josh = {
-                imports = [
-                  ./profiles/all.nix
-                  ./profiles/gui.nix
-                  ./profiles/games.nix
-                ];
-              };
+          (mkSystemUsers {
+            users.josh = {
+              groups = [
+                "networkmanager"
+                "wheel"
+              ];
+              modules = [
+                ./profiles/common.nix
+                ./profiles/gui.nix
+                ./profiles/games.nix
+              ];
             };
-          }
+          })
         ];
       };
     };

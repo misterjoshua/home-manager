@@ -9,8 +9,4 @@
   };
 
   programs.home-manager.enable = true;
-
-  imports = [
-    ./profiles/all.nix
-  ];
 }

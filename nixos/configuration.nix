@@ -35,14 +35,6 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     defaultUserShell = pkgs.bashInteractive;
-    users.josh = {
-      isNormalUser = true;
-      description = "Josh";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-      ];
-    };
   };
 
   # Install firefox.
