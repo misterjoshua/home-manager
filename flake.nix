@@ -9,7 +9,7 @@ rec {
   };
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
+
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -20,14 +20,15 @@ rec {
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       home-manager-utils,
-      self,
       ...
     }:
     let
@@ -36,19 +37,22 @@ rec {
         inherit system;
         config.allowUnfree = true;
       };
-      mkSystemUsers = import ./nixos/user.nix { inherit home-manager; };
+      utils = home-manager-utils.override {
+        inherit pkgs;
+        extraModules = [ ./profiles/common.nix ];
+      };
     in
     {
       devShells.${system}.default = import ./shell.nix { inherit pkgs; };
 
-      homeConfigurations.josh = home-manager-utils.standaloneHome {
+      homeConfigurations.josh = utils.standaloneHome {
         username = "josh";
         modules = [
           ./profiles/common.nix
         ];
       };
 
-      homeConfigurations.josh-wsl = home-manager-utils.standaloneHome {
+      homeConfigurations.josh-wsl = utils.standaloneHome {
         username = "josh";
         modules = [
           ./profiles/common.nix
@@ -60,7 +64,7 @@ rec {
         inherit system;
         modules = [
           ./nixos/configuration.nix
-          (home-manager-utils.nixosUsers {
+          (utils.nixosUsers {
             users.josh = {
               modules = [
                 ./profiles/common.nix

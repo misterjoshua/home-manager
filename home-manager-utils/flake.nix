@@ -15,13 +15,7 @@
       nixpkgs,
       home-manager,
     }:
-    {
-      standaloneHome = import ./standalone-home.nix {
-        inherit self nixpkgs home-manager;
-      };
-
-      nixosUser = import ./nixos-user.nix {
-        inherit self nixpkgs home-manager;
-      };
+    (import ./lib.nix).override {
+      inherit self home-manager;
     };
 }

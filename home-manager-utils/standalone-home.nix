@@ -1,14 +1,14 @@
 {
   self,
-  nixpkgs,
   home-manager,
-}:
-{
   username,
+  pkgs,
   modules ? [ ],
+  extraModules ? [ ],
+  ...
 }:
 let
-  setupModule =
+  standaloneModule =
     { pkgs, ... }:
     {
       nix = {
@@ -20,18 +20,14 @@ let
       };
 
       programs.home-manager.enable = true;
-      home = {
-        inherit username;
-        homeDirectory = "/home/${username}";
-        stateVersion = "24.11";
-      };
     };
-  pkgs = import nixpkgs {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
 in
 home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
-  modules = [ setupModule ] ++ modules;
+  modules = [
+    (import ./home.nix { inherit username; })
+    standaloneModule
+  ]
+  ++ modules
+  ++ extraModules;
 }

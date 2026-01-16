@@ -1,17 +1,11 @@
 {
   self,
-  nixpkgs,
   home-manager,
-}:
-{
   users ? { },
+  extraModules ? [ ],
+  ...
 }:
 let
-  pkgs = import nixpkgs {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
-
   mkSystemUser = (
     username: config: {
       isNormalUser = true;
@@ -22,10 +16,11 @@ let
 
   mkHomeManagerUser = (
     username: config: {
-      home = {
-        inherit username;
-        homeDirectory = "/home/${username}";
-      };
+      imports = [
+        (import ./home.nix { inherit username; })
+      ]
+      ++ config.modules
+      ++ extraModules;
     }
   );
 in
