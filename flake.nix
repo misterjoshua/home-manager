@@ -37,6 +37,7 @@ rec {
         config.allowUnfree = true;
       };
       nixSettings = _: { nix.settings = nixConfig; };
+
       utils = home-manager-utils.override {
         inherit pkgs;
         extraModules = [
@@ -44,6 +45,7 @@ rec {
           ./profiles/common.nix
         ];
       };
+      nixos = import ./nixos;
     in
     {
       devShells.${system}.default = import ./shell.nix { inherit pkgs; };
@@ -63,7 +65,10 @@ rec {
         inherit system;
         modules = [
           nixSettings
-          ./nixos/configuration.nix
+          (nixos.configuration {
+            hostName = "nixos";
+            hardware = nixos.hardware.hyper-v;
+          })
           (utils.nixosUsers {
             users.josh = {
               modules = [
