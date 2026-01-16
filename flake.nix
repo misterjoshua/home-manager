@@ -15,6 +15,13 @@ rec {
     flake-utils.url = "github:numtide/flake-utils";
   };
 
+  nixConfig = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
+
   outputs =
     {
       self,
@@ -29,9 +36,13 @@ rec {
         inherit system;
         config.allowUnfree = true;
       };
+      nixSettings = _: { nix.settings = nixConfig; };
       utils = home-manager-utils.override {
         inherit pkgs;
-        extraModules = [ ./profiles/common.nix ];
+        extraModules = [
+          nixSettings
+          ./profiles/common.nix
+        ];
       };
     in
     {
@@ -51,6 +62,7 @@ rec {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          nixSettings
           ./nixos/configuration.nix
           (utils.nixosUsers {
             users.josh = {
