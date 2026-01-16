@@ -9,7 +9,6 @@ rec {
   };
 
   inputs = {
-
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -47,15 +46,11 @@ rec {
 
       homeConfigurations.josh = utils.standaloneHome {
         username = "josh";
-        modules = [
-          ./profiles/common.nix
-        ];
       };
 
       homeConfigurations.josh-wsl = utils.standaloneHome {
         username = "josh";
         modules = [
-          ./profiles/common.nix
           ./profiles/wsl.nix
         ];
       };
@@ -67,7 +62,6 @@ rec {
           (utils.nixosUsers {
             users.josh = {
               modules = [
-                ./profiles/common.nix
                 ./profiles/gui.nix
                 ./profiles/games.nix
               ];

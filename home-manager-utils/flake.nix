@@ -12,10 +12,13 @@
   outputs =
     {
       self,
-      nixpkgs,
       home-manager,
+      ...
     }:
-    (import ./lib.nix).override {
-      inherit self home-manager;
+    let
+      lib = import ./lib.nix;
+    in
+    lib.override {
+      inherit home-manager;
     };
 }
