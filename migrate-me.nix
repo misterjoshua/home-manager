@@ -24,8 +24,6 @@ let
   nixos = import ./nixos;
 in
 {
-  devShells.${system}.default = import ./shell.nix { inherit pkgs; };
-
   homeConfigurations.josh = utils.standaloneHome {
     username = "josh";
   };

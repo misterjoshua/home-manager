@@ -28,6 +28,7 @@ rec {
       }:
       {
         systems = [ "x86_64-linux" ];
+        imports = [ ./shells.nix ];
         flake = import ./migrate-me.nix (inputs // { inherit nixConfig; });
       }
     );
