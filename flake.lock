@@ -38,25 +38,6 @@
         "type": "github"
       }
     },
-    "home-manager-utils": {
-      "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "path": "home-manager-utils",
-        "type": "path"
-      },
-      "original": {
-        "path": "home-manager-utils",
-        "type": "path"
-      },
-      "parent": []
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1768127708,
@@ -92,7 +73,6 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
-        "home-manager-utils": "home-manager-utils",
         "nixpkgs": "nixpkgs"
       }
     }

@@ -7,11 +7,6 @@ rec {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager-utils = {
-      url = ./home-manager-utils;
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 

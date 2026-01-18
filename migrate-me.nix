@@ -2,7 +2,6 @@
   self,
   nixpkgs,
   home-manager,
-  home-manager-utils,
   flake-parts,
   nixConfig,
   ...
@@ -15,8 +14,8 @@ let
   };
   nixSettings = _: { nix.settings = nixConfig; };
 
-  utils = home-manager-utils.override {
-    inherit pkgs;
+  utils = (import ./home-manager-utils/lib.nix).override {
+    inherit pkgs home-manager;
     extraModules = [
       nixSettings
       ./profiles/common.nix
