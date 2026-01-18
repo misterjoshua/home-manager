@@ -83,5 +83,27 @@ rec {
           })
         ];
       };
+
+      nixosConfigurations.swagbox = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          nixSettings
+          (nixos.configuration {
+            hostName = "swagbox";
+            hardware = nixos.hardware.swagbox;
+          })
+          (utils.nixosUsers {
+            users.josh = {
+              modules = [
+                ./profiles/gui.nix
+              ];
+              extraGroups = [
+                "networkmanager"
+                "wheel"
+              ];
+            };
+          })
+        ];
+      };
     };
 }
