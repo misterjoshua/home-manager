@@ -14,14 +14,14 @@ let
   };
   nixSettings = _: { nix.settings = nixConfig; };
 
-  utils = (import ./home-manager-utils/lib.nix).override {
+  utils = (import ./modules/home-manager-utils).override {
     inherit pkgs home-manager;
     extraModules = [
       nixSettings
       ./profiles/common.nix
     ];
   };
-  nixos = import ./nixos;
+  nixos = import ./modules/nixos;
 in
 {
   homeConfigurations.josh = utils.standaloneHome {
