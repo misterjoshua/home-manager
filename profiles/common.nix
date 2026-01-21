@@ -96,13 +96,11 @@
     modules = [
       "user" # Show the user.
       "host" # Show the host.
-      "time" # Show the time.
-      "ssh" # ???
-      "direnv" # Show the direnv context.
-      "venv"
-      "git" # Git info
-      "kube" # Show the current kubernetes context.
       "cwd" # Show the current working directory.
+      "direnv" # Show the direnv context.
+      "git" # Git info
+      "venv"
+      "kube" # Show the current kubernetes context.
       "newline"
       "root" # Show if you're root.
     ];
