@@ -19,6 +19,7 @@
     kube-capacity
     kubectl-tree
     velero
+    kubernetes-helm
   ];
 
   # Add handy kubectl aliases
