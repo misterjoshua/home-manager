@@ -132,7 +132,10 @@
       settings = {
         user.email = "joshkellendonk@gmail.com";
         user.name = "Josh Kellendonk";
-        extraConfig.pull.rebase = true;
+        extraConfig = {
+          pull.rebase = true;
+          init.defaultBranc = true;
+        };
       };
     };
 
