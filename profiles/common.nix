@@ -134,7 +134,8 @@
         user.name = "Josh Kellendonk";
         extraConfig = {
           pull.rebase = true;
-          init.defaultBranc = true;
+          push.autoSetupRemote = true;
+          init.defaultBranch = "main";
         };
       };
     };
