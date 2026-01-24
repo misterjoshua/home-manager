@@ -16,7 +16,7 @@ let
     inherit pkgs home-manager;
     extraModules = [
       inputs.self.modules.homeManager.nixConfig
-      ../profiles/common.nix
+      inputs.self.modules.homeManager.commonProfile
     ];
   };
   nixos = import ../modules/nixos;
@@ -30,7 +30,7 @@ in
     homeConfigurations.josh-wsl = utils.standaloneHome {
       username = "josh";
       modules = [
-        ../profiles/wsl.nix
+        inputs.self.modules.homeManager.wslProfile
       ];
     };
 
@@ -45,8 +45,8 @@ in
         (utils.nixosUsers {
           users.josh = {
             modules = [
-              ../profiles/gui.nix
-              ../profiles/games.nix
+              inputs.self.modules.homeManager.guiProfile
+              inputs.self.modules.homeManager.gamesProfile
             ];
             extraGroups = [
               "networkmanager"
@@ -68,7 +68,7 @@ in
         (utils.nixosUsers {
           users.josh = {
             modules = [
-              ../profiles/gui.nix
+              inputs.self.modules.homeManager.guiProfile
             ];
             extraGroups = [
               "networkmanager"
