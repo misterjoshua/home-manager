@@ -1,4 +1,4 @@
-rec {
+{
   description = "KlonkadonkOS";
 
   inputs = {
@@ -8,6 +8,7 @@ rec {
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
   };
 
   nixConfig = {
@@ -17,11 +18,13 @@ rec {
     ];
   };
 
-  outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
-      imports = [ ./shells.nix ];
-      flake = import ./migrate-me.nix (inputs // { inherit nixConfig; });
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+
+    imports = [
+      # https://github.com/mightyiam/dendritic?tab=readme-ov-file
+      # https://github.com/Doc-Steve/dendritic-design-with-flake-parts/
+      inputs.flake-parts.flakeModules.modules
+      (inputs.import-tree ./parts)
+    ];
+  };
 }
