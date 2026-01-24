@@ -18,13 +18,15 @@
     ];
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
 
-    imports = [
-      # https://github.com/mightyiam/dendritic?tab=readme-ov-file
-      # https://github.com/Doc-Steve/dendritic-design-with-flake-parts/
-      inputs.flake-parts.flakeModules.modules
-      (inputs.import-tree ./parts)
-    ];
-  };
+      imports = [
+        # https://github.com/mightyiam/dendritic?tab=readme-ov-file
+        # https://github.com/Doc-Steve/dendritic-design-with-flake-parts/
+        inputs.flake-parts.flakeModules.modules
+        (inputs.import-tree ./parts)
+      ];
+    };
 }
