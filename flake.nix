@@ -19,17 +19,9 @@ rec {
 
   outputs =
     inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      top@{
-        config,
-        withSystem,
-        moduleWithSystem,
-        ...
-      }:
-      {
-        systems = [ "x86_64-linux" ];
-        imports = [ ./shells.nix ];
-        flake = import ./migrate-me.nix (inputs // { inherit nixConfig; });
-      }
-    );
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
+      imports = [ ./shells.nix ];
+      flake = import ./migrate-me.nix (inputs // { inherit nixConfig; });
+    };
 }
