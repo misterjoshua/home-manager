@@ -72,6 +72,13 @@
     hm = "vim ~/.config/home-manager";
     hms = "home-manager switch";
   };
+  programs.bash.shellOptions = [
+    "histappend"
+    "extglob"
+    "globstar"
+    "checkjobs"
+    "no_empty_cmd_completion"
+  ];
 
   # Powerline bash prompt line
   programs.powerline-go.enable = true;
