@@ -21,11 +21,9 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-
       imports = [
-        # https://github.com/mightyiam/dendritic?tab=readme-ov-file
-        # https://github.com/Doc-Steve/dendritic-design-with-flake-parts/
         inputs.flake-parts.flakeModules.modules
+        inputs.home-manager.flakeModules.home-manager
         (inputs.import-tree ./parts)
       ];
     };
