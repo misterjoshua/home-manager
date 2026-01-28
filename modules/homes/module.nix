@@ -24,7 +24,9 @@ in
       };
 
     modules.nixos.josh =
-      { ... }:
+      {
+        ...
+      }:
       {
         users.users.josh = {
           isNormalUser = true;
