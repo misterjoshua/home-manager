@@ -6,7 +6,7 @@
     system = "x86_64-linux";
     hardware = ./_hardware/swagbox.nix;
     hostname = "swagbox";
-    features.base.enable = true;
+    features.htpc.enable = true;
     features.josh.enable = true;
   };
 }
