@@ -9,7 +9,7 @@
 let
   featureOptionsType = lib.types.submodule {
     options = {
-      enabled = lib.mkOption {
+      enable = lib.mkOption {
         type = lib.types.bool;
         description = "Whether to enable the feature.";
       };
@@ -25,6 +25,7 @@ let
       features = lib.mkOption {
         type = lib.types.attrsOf featureOptionsType;
         description = "The features to enable for the home configuration.";
+        default = { };
       };
     };
   };
@@ -35,17 +36,19 @@ let
         description = "The system to use for the NixOS configuration.";
         type = lib.types.str;
       };
-      hostname = lib.mkOption {
-        description = "The hostname to use for the NixOS configuration.";
-        type = lib.types.str;
-      };
       hardware = lib.mkOption {
         type = lib.types.either lib.types.path lib.types.deferredModule;
         description = "The hardware to use for the NixOS configuration.";
       };
+      hostname = lib.mkOption {
+        description = "The hostname to use for the NixOS configuration.";
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+      };
       features = lib.mkOption {
         type = lib.types.attrsOf featureOptionsType;
         description = "The features to enable for the NixOS configuration";
+        default = { };
       };
     };
   };
@@ -64,41 +67,40 @@ let
     else
       throw "You've attempted to enable non-existent feature named `${name}`. To use this feature, you should define it as `flake.modules.nixos.${name}`";
 
-  mkHomeConfiguration = name: home: {
-    ${name} = withSystem home.system (
+  mkFeaturesWith =
+    getFeature: features:
+    let
+      enabledFeatures = lib.filterAttrs (_: v: v.enable or false) features;
+      featureModules = lib.mapAttrs (key: _: (getFeature key)) enabledFeatures;
+    in
+    lib.attrValues featureModules;
+
+  mkHomeConfiguration =
+    name: home:
+    withSystem home.system (
       { pkgs, ... }:
-      let
-        features = lib.filterAttrs (_: v: v.enabled or false) home.features;
-        featureModules = lib.attrValues (
-          lib.mapAttrs (name: featureOptions: (getHomeManagerFeature name)) features
-        );
-      in
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = featureModules;
+        modules = (mkFeaturesWith getHomeManagerFeature home.features);
       }
     );
-  };
 
   mkNixosConfiguration =
-    name: nixos:
-    withSystem nixos.system (
-      { ... }:
-      let
-        hostnameModule =
-          if nixos.hostname != null then (_: { networking.hostName = nixos.hostname; }) else null;
-        features = lib.filterAttrs (_: v: v.enabled or false) nixos.features;
-        featureModules = lib.attrValues (
-          lib.mapAttrs (name: featureOptions: (getNixosFeature name)) features
-        );
-      in
+    name: nixosConfiguration:
+    withSystem nixosConfiguration.system (
+      { system, ... }:
       inputs.nixpkgs.lib.nixosSystem {
-        system = nixos.system;
+        inherit system;
         modules = [
-          hostnameModule
-          nixos.hardware
+          (
+            _:
+            lib.mkIf (nixosConfiguration.hostname != null) {
+              networking.hostName = nixosConfiguration.hostname;
+            }
+          )
+          nixosConfiguration.hardware
         ]
-        ++ featureModules;
+        ++ (mkFeaturesWith getNixosFeature nixosConfiguration.features);
       }
     );
 in
@@ -120,7 +122,7 @@ in
   };
 
   config = {
-    flake.homeConfigurations = builtins.mapAttrs mkHomeConfiguration config.dendritic.homeConfigurations;
-    flake.nixosConfigurations = builtins.mapAttrs mkNixosConfiguration config.dendritic.nixosConfigurations;
+    flake.homeConfigurations = lib.mapAttrs mkHomeConfiguration config.dendritic.homeConfigurations;
+    flake.nixosConfigurations = lib.mapAttrs mkNixosConfiguration config.dendritic.nixosConfigurations;
   };
 }

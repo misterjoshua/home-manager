@@ -1,13 +1,13 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.homeManagerConfig =
+  flake.modules.homeManager.homeManager =
     { pkgs, ... }:
     {
       nix.package = pkgs.nix;
       programs.home-manager.enable = true;
     };
 
-  flake.modules.nixos.homeManagerConfig =
+  flake.modules.nixos.homeManager =
     { ... }:
     {
       imports = [

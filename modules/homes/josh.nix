@@ -1,18 +1,15 @@
 {
-  inputs,
-  self,
-  withSystem,
   ...
 }:
 {
-  flake.homeConfigurations.josh = withSystem "x86_64-linux" (
-    { pkgs, ... }:
-    inputs.home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [
-        self.modules.homeManager.homeManagerConfig
-        self.modules.homeManager.josh
-      ];
-    }
-  );
+  dendritic.homeConfigurations.josh = {
+    system = "x86_64-linux";
+    features.josh.enable = true;
+  };
+
+  dendritic.homeConfigurations.josh-wsl = {
+    system = "x86_64-linux";
+    features.josh.enable = true;
+    features.wsl.enable = true;
+  };
 }

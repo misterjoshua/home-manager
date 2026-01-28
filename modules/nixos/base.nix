@@ -1,11 +1,10 @@
 { self, ... }:
 {
-  flake.modules.nixos.desktop =
+  flake.modules.nixos.base =
     { pkgs, ... }:
     {
       imports = [
-        self.modules.nixos.nixConfig
-        self.modules.nixos.homeManagerConfig
+        self.modules.nixos.nix
       ];
 
       nixpkgs.config.allowUnfree = true;
@@ -20,9 +19,6 @@
       time.timeZone = "America/Edmonton";
       i18n.defaultLocale = "en_CA.UTF-8";
 
-      services.displayManager.sddm.enable = true;
-      services.desktopManager.plasma6.enable = true;
-
       services.avahi = {
         enable = true;
         nssmdns4 = true;
@@ -35,25 +31,11 @@
         openFirewall = true;
       };
 
-      # Enable sound with pipewire.
-      services.pulseaudio.enable = false;
-      security.rtkit.enable = true;
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        jack.enable = true;
-      };
-
-      services.printing.enable = true;
-
       # Define a user account. Don't forget to set a password with ‘passwd’.
       users = {
         defaultUserShell = pkgs.bashInteractive;
       };
 
-      programs.firefox.enable = true;
       programs.bash.enable = true;
       environment.systemPackages = with pkgs; [
         vim

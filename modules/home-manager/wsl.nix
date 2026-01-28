@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.wslProfile =
+  flake.modules.homeManager.wsl =
     { ... }:
     {
       home.shellAliases = {

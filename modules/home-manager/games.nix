@@ -1,5 +1,6 @@
+{ ... }:
 {
-  flake.modules.homeManager.gamesProfile =
+  flake.modules.homeManager.games =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [

@@ -1,16 +1,12 @@
 {
-  inputs,
-  self,
   ...
 }:
 {
-  flake.nixosConfigurations.swagbox = inputs.nixpkgs.lib.nixosSystem {
+  dendritic.nixosConfigurations.swagbox = {
     system = "x86_64-linux";
-    modules = [
-      self.modules.nixos.desktop
-      self.modules.nixos.swagbox-hardware
-      self.modules.nixos.josh
-      (_: { networking.hostName = "swagbox"; })
-    ];
+    hardware = ./_hardware/swagbox.nix;
+    hostname = "swagbox";
+    features.desktop.enable = true;
+    features.josh.enable = true;
   };
 }
