@@ -7,6 +7,7 @@
         packages = with pkgs; [
           nixfmt
           nixd
+          nixos-rebuild
         ];
       };
     };
