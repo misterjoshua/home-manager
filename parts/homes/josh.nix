@@ -10,8 +10,8 @@
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [
-        self.modules.homeManager.distoEnv
-        self.modules.homeManager.joshHome
+        self.modules.homeManager.homeManagerConfig
+        self.modules.homeManager.josh
       ];
     }
   );

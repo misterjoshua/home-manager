@@ -2,27 +2,42 @@
   self,
   ...
 }:
+let
+  stateVersion = "24.11";
+  homeImports = [
+    self.modules.homeManager.nixConfig
+    self.modules.homeManager.commonProfile
+  ];
+in
 {
   flake = {
-    modules.homeManager.distoEnv =
-      { pkgs, ... }:
-      {
-        nix.package = pkgs.nix;
-        programs.home-manager.enable = true;
-      };
-
-    modules.homeManager.joshHome =
+    modules.homeManager.josh =
       { ... }:
       {
-        imports = [
-          self.modules.homeManager.nixConfig
-          self.modules.homeManager.commonProfile
-        ];
+        imports = homeImports;
 
         home = {
           username = "josh";
           homeDirectory = "/home/josh";
-          stateVersion = "24.11";
+          inherit stateVersion;
+        };
+      };
+
+    modules.nixos.josh =
+      { ... }:
+      {
+        users.users.josh = {
+          isNormalUser = true;
+          description = "Josh";
+          extraGroups = [
+            "networkmanager"
+            "wheel"
+          ];
+        };
+
+        home-manager.users.josh = {
+          imports = homeImports;
+          home.stateVersion = stateVersion;
         };
       };
   };
