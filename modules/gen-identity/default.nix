@@ -1,6 +1,6 @@
 { ... }:
 let
-  mkGenIdentityActivation =
+  mkGenIdentityCall =
     {
       pkgs,
       identityName,
@@ -25,20 +25,20 @@ in
       ...
     }:
     let
-      genIdentityActivation = mkGenIdentityActivation {
+      genIdentityCall = mkGenIdentityCall {
         inherit pkgs;
         identityName = config.home.username;
         outDir = "${config.home.homeDirectory}/.config/identity";
       };
     in
     {
-      home.activation.gen-identity = lib.hm.dag.entryAfter [ "writeBoundary" ] genIdentityActivation;
+      home.activation.gen-identity = lib.hm.dag.entryAfter [ "writeBoundary" ] genIdentityCall;
     };
 
   flake.modules.nixos.gen-identity =
     { pkgs, config, ... }:
     let
-      genIdentityActivation = mkGenIdentityActivation {
+      genIdentityCall = mkGenIdentityCall {
         inherit pkgs;
         identityName = config.networking.hostName;
         outDir = "/etc/identity";
@@ -50,7 +50,7 @@ in
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           Type = "oneshot";
-          ExecStart = genIdentityActivation;
+          ExecStart = genIdentityCall;
         };
       };
     };
