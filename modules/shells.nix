@@ -8,6 +8,7 @@
           nixfmt
           nixd
           nixos-rebuild
+          age
         ];
       };
     };

@@ -5,6 +5,7 @@
     {
       imports = [
         self.modules.nixos.nix
+        self.modules.nixos.gen-identity
       ];
 
       nixpkgs.config.allowUnfree = true;

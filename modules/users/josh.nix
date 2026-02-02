@@ -16,6 +16,7 @@ in
       {
         imports = [
           self.modules.homeManager.homeManager
+          self.modules.homeManager.gen-identity
         ]
         ++ homeImports;
 
