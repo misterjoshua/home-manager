@@ -30,6 +30,7 @@
     graphviz
     unzip
     binwalk
+    ripgrep
     # Network
     curl
     mtr
