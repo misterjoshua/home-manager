@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.nixos.base =
+  flake.modules.nixos.default =
     { pkgs, ... }:
     {
       imports = [

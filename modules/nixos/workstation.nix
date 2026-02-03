@@ -1,13 +1,8 @@
 { self, ... }:
 {
-  flake.modules.nixos.desktop =
+  flake.modules.nixos.workstation =
     { pkgs, ... }:
     {
-      imports = [
-        self.modules.nixos.nix
-        self.modules.nixos.base
-      ];
-
       services.displayManager.sddm.enable = true;
       services.desktopManager.plasma6.enable = true;
 

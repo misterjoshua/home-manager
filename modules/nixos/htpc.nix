@@ -3,11 +3,6 @@
   flake.modules.nixos.htpc =
     { pkgs, ... }:
     {
-      imports = [
-        self.modules.nixos.nix
-        self.modules.nixos.base
-      ];
-
       # Enable sound with pipewire.
       services.pulseaudio.enable = false;
       security.rtkit.enable = true;
