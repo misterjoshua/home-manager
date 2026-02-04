@@ -26,8 +26,6 @@
         inputs.flake-parts.flakeModules.easyOverlay
         inputs.home-manager.flakeModules.home-manager
         (inputs.import-tree ./modules)
-        (inputs.import-tree ./hosts)
-        (inputs.import-tree ./homes)
       ];
     };
 }

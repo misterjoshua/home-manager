@@ -108,7 +108,7 @@ let
         hostName =
           if nixosConfiguration.hostname != null then nixosConfiguration.hostname else configurationName;
         features = defaultFeatures // nixosConfiguration.features;
-        fallbackHardware = "./hosts/_hardware/${hostName}.nix";
+        fallbackHardware = "../hosts/_hardware/${hostName}.nix";
         hardware =
           if nixosConfiguration.hardware != null then
             # Attempt to use the provided hardware module.
