@@ -108,14 +108,14 @@ let
         hostName =
           if nixosConfiguration.hostname != null then nixosConfiguration.hostname else configurationName;
         features = defaultFeatures // nixosConfiguration.features;
-        fallbackHardware = "../hosts/_hardware/${hostName}.nix";
+        fallbackHardware = "${config.dendritic.nixosHardwareDirectory}/${hostName}.nix";
         hardware =
           if nixosConfiguration.hardware != null then
             # Attempt to use the provided hardware module.
             nixosConfiguration.hardware
-          else if builtins.pathExists ./${fallbackHardware} then
+          else if builtins.pathExists fallbackHardware then
             # No hardware provided, so use the fallback hardware module.
-            ./${fallbackHardware}
+            fallbackHardware
           else
             # No hardware provided and fallback hardware module does not exist, so this is an error.
             throw
@@ -136,6 +136,11 @@ in
 {
   options = {
     dendritic = {
+      nixosHardwareDirectory = lib.mkOption {
+        description = "The directory to look for hardware modules in.";
+        type = lib.types.path;
+      };
+
       homeConfigurations = lib.mkOption {
         description = "A dendritic design-aware module for creating Home Manager configurations.";
         type = lib.types.attrsOf homeConfigurationType;

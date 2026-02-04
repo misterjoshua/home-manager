@@ -1,0 +1,4 @@
+{ ... }:
+{
+  dendritic.nixosHardwareDirectory = ./_hardware;
+}
