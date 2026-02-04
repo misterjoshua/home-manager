@@ -9,6 +9,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     import-tree.url = "github:vic/import-tree";
+    git-hooks-nix.url = "github:cachix/git-hooks.nix";
+    git-hooks-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   nixConfig = {
@@ -25,6 +27,7 @@
         inputs.flake-parts.flakeModules.modules
         inputs.flake-parts.flakeModules.easyOverlay
         inputs.home-manager.flakeModules.home-manager
+        inputs.git-hooks-nix.flakeModule
         (inputs.import-tree ./modules)
       ];
     };
