@@ -1,16 +1,16 @@
-{ ... }:
+{ lib, config, ... }:
 {
   plugins.lsp = {
     enable = true;
-    # inlayHints = true;
+    inlayHints = true;
 
     servers = {
       bashls.enable = true;
       nixd.enable = true;
-      ts_ls.enable = true;
       jsonls.enable = true;
       eslint.enable = true;
       prettier.enable = true;
+      ts_ls.enable = true;
     };
 
     postConfig = ''
@@ -22,5 +22,9 @@
         float = true;
       })
     '';
+  };
+
+  plugins.lsp-format = lib.mkIf (config.plugins.lsp.enable) {
+    enable = true;
   };
 }
