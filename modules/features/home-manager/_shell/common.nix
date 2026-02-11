@@ -8,17 +8,10 @@
     apg
     # Shells
     powershell
-    bash
-    zsh
     # Language Servers
     lua-language-server
     vim-language-server
     nixd
-    # Git
-    git
-    git-lfs
-    git-crypt
-    gh
     # Cloud
     awscli2
     steampipe
@@ -59,35 +52,9 @@
     fileWidgetOptions = [
       "--preview 'bat --color=always {}'"
     ];
-    tmux = {
-      enableShellIntegration = true;
-    };
+    tmux.enableShellIntegration = true;
   };
 
   # Preview files with bat.
   programs.bat.enable = true;
-
-  programs = {
-    git = {
-      enable = true;
-      lfs.enable = true;
-      settings = {
-        user.email = "joshkellendonk@gmail.com";
-        user.name = "Josh Kellendonk";
-        extraConfig = {
-          pull.rebase = true;
-          push.autoSetupRemote = true;
-          init.defaultBranch = "main";
-        };
-      };
-    };
-
-    gh.enable = true; # Manage github cli.
-
-    direnv = {
-      enable = true;
-      enableBashIntegration = true;
-      nix-direnv.enable = true;
-    };
-  };
 }

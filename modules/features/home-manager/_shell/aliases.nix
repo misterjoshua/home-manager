@@ -1,6 +1,6 @@
 { ... }:
 {
-  programs.bash.shellAliases = {
+  home.shellAliases = {
     l = "ls --color=auto";
     ll = "ls -l --color=auto";
     ls = "ls --color=auto";
