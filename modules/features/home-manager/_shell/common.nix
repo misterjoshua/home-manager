@@ -9,6 +9,7 @@
     # Shells
     powershell
     bash
+    zsh
     # Language Servers
     lua-language-server
     vim-language-server
@@ -43,59 +44,8 @@
     dig
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
-
   home.sessionVariables = {
     PATH = "$PATH:$HOME/.config/composer/vendor/bin:$HOME/.local/bin";
-  };
-
-  # Manage bash's config.
-  programs.bash.enable = true;
-  programs.bash.shellAliases = {
-    l = "ls --color=auto";
-    ll = "ls -l --color=auto";
-    ls = "ls --color=auto";
-    grep = "grep --color=auto";
-    diff = "diff --color=auto";
-    hm = "vim ~/.config/home-manager";
-    hms = "home-manager switch";
-  };
-  programs.bash.shellOptions = [
-    "histappend"
-    "extglob"
-    "globstar"
-    "checkjobs"
-    "no_empty_cmd_completion"
-  ];
-
-  # Powerline bash prompt line
-  programs.powerline-go.enable = true;
-  programs.powerline-go.settings = {
-    mode = "flat"; # flat so it works in more terminals
-    modules = [
-      "user" # Show the user.
-      "host" # Show the host.
-      "cwd" # Show the current working directory.
-      "direnv" # Show the direnv context.
-      "git" # Git info
-      "venv"
-      "kube" # Show the current kubernetes context.
-      "newline"
-      "root" # Show if you're root.
-    ];
   };
 
   # FZF for fuzzy search of files and autocomplete.
