@@ -1,15 +1,14 @@
 {
-  config,
   pkgs,
   lib,
   ...
 }:
-
 {
   # Kubectl
   programs.kubecolor = {
     enable = true;
     enableAlias = true;
+    enableZshIntegration = false;
   };
 
   # Plugins
@@ -23,7 +22,7 @@
   ];
 
   # Add handy kubectl aliases
-  programs.bash.shellAliases = {
+  home.shellAliases = {
     k = "kubectl";
   };
 
@@ -43,11 +42,14 @@
     }
   '';
 
-  # Create symlinks for kubectl plugins
+  home.sessionPath = [
+    "$HOME/.local/kube.nix"
+  ];
+
   home.file = {
-    ".local/bin/kubectl-ns".source = lib.mkForce "${pkgs.kubectx}/bin/kubens";
-    ".local/bin/kubectl-ctx".source = lib.mkForce "${pkgs.kubectx}/bin/kubectx";
-    ".local/bin/kubectl-capacity".source = lib.mkForce "${pkgs.kube-capacity}/bin/kube-capacity";
-    ".local/bin/kubectl-tree".source = lib.mkForce "${pkgs.kubectl-tree}/bin/kubectl-tree";
+    ".local/kube.nix/kubectl-ns".source = lib.mkForce "${pkgs.kubectx}/bin/kubens";
+    ".local/kube.nix/kubectl-ctx".source = lib.mkForce "${pkgs.kubectx}/bin/kubectx";
+    ".local/kube.nix/kubectl-capacity".source = lib.mkForce "${pkgs.kube-capacity}/bin/kube-capacity";
+    ".local/kube.nix/kubectl-tree".source = lib.mkForce "${pkgs.kubectl-tree}/bin/kubectl-tree";
   };
 }
