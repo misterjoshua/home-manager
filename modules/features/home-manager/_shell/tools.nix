@@ -34,6 +34,8 @@
     ngrok
     dig
     dig.host
+    # Code analysis
+    ast-grep
   ];
 
   # home.sessionVariables = {
