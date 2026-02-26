@@ -15,14 +15,8 @@
       };
     };
 
-  flake.modules.homeManager.cool-factor =
-    { pkgs, ... }:
-    {
-      # Not sure yet what to add here.
-    };
-
   # Add cool-factor to a few nixos feature-sets.
-  flake.modules.nixos.desktop =
+  flake.modules.nixos.workstation =
     { ... }:
     {
       imports = [

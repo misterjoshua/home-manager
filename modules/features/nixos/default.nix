@@ -1,7 +1,7 @@
 { self, ... }:
 {
   flake.modules.nixos.default =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       imports = [
         self.modules.nixos.nix
@@ -11,6 +11,9 @@
       nixpkgs.config.allowUnfree = true;
 
       boot.loader.systemd-boot.enable = true;
+      boot.loader.systemd-boot.configurationLimit = 5;
+      boot.loader.systemd-boot.memtest86.enable = true;
+      boot.loader.systemd-boot.consoleMode = "max";
       boot.loader.efi.canTouchEfiVariables = true;
       boot.kernelPackages = pkgs.linuxPackages_latest;
 
