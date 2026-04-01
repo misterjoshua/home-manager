@@ -37,6 +37,8 @@
     dig.host
     # Code analysis
     ast-grep
+    # SMTP test tool
+    swaks
   ];
 
   # home.sessionVariables = {
