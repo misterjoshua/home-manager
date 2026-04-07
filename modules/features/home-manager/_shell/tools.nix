@@ -12,6 +12,7 @@
     nixd
     # Cloud
     awscli2
+    azure-cli
     steampipe
     # CLI utils
     jq
