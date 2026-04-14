@@ -35,6 +35,7 @@
     ngrok
     dig
     dig.host
+    whois
     # Code analysis
     ast-grep
     # SMTP test tool
