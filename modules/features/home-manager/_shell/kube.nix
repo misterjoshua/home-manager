@@ -18,6 +18,7 @@
     kube-capacity
     kubectl-tree
     velero
+    kyverno
     kubernetes-helm
   ];
 
