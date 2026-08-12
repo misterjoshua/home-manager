@@ -4,6 +4,7 @@
     _1password-cli
     pipx
     apg
+    subversion
     # Shells
     powershell
     # Language Servers
@@ -21,6 +22,7 @@
     htop
     tmux
     graphviz
+    zip
     unzip
     binwalk
     ripgrep
